@@ -1,0 +1,1 @@
+javac -cp %CLASSPATH%;%CATALINA_HOME%\lib\json_simple-1.1.jar;%CATALINA_HOME%\lib\box4j-1.4.0.jar;%CATALINA_HOME%\classes -d "C:\dockingcloud\cloudproject\WebContent\WEB-INF\classes\classes" %1

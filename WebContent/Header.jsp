@@ -17,18 +17,17 @@
           <a class="brand" href="#">DockingCloud</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="about.html">About</a></li>
+              <li class="active"><a href="index.jsp">Home</a></li>
+              <li><a href="about.jsp">About</a></li>
             </ul>
             <ul class="nav pull-right">
         <%
           String id=(String)session.getAttribute("loginid");
           if(id!=null){
         %>
-                <li><a href="write.jsp">새 글 작성</a></li>
-                <li><a href="process_logout.jsp"><%=id%>로그아웃</a></li>
+              <li><a href="process_logout.jsp"><%=id%>로그아웃</a></li>
         <% } else { %>
-               <li><a href="register.jsp">회원가입</a></li>
+              <li><a href="register.jsp">회원가입</a></li>
               <li><a href="login.jsp">로그인</a></li>
         <% } %>
             </ul>

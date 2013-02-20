@@ -1,56 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	
 	<context-param>
-		<param-name>MasterID</param-name>
-		<param-value>0891063</param-value>
+		<param-name>bnetAppKey</param-name>
+		<param-value>3gwh613dud506hjrgsktbhffud6yrm5m</param-value>
 	</context-param>
 
-	<context-param>
-		<param-name>MasterPassword</param-name>
-		<param-value>112233</param-value>
-	</context-param>
-	
-
-	<description>
-		JSPBook Examples
-	</description>
-	<display-name>JSPBook Examples</display-name>
-	
-	<servlet>
-		<servlet-name>HelloWorldServlet</servlet-name>
-		<servlet-class>HelloWorldServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>HelloWorldServlet</servlet-name>
-		<url-pattern>/HelloWorldServlet</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>readInitParamJSP</servlet-name>
-		<jsp-file>/ch08/readInitParam.jsp</jsp-file>
-
-		<init-param>
-			<param-name>e-mail</param-name>
-			<param-value>tndh1109@naver.com</param-value>
-		</init-param>
-
-		<init-param>
-			<param-name>emailHost</param-name>
-			<param-value>151.68.167.201</param-value>
-		</init-param>
-
-		<init-param>
-			<param-name>webMaster</param-name>
-			<param-value>안수오</param-value>
-		</init-param>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>readInitParamJSP</servlet-name>
-		<url-pattern>/ch08/readInitParam.jsp</url-pattern>
-	</servlet-mapping>
-	
 	 <welcome-file-list>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.htm</welcome-file>
