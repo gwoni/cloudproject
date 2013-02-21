@@ -21,67 +21,66 @@
 <%@ page import= "java.util.Map" %>
 <%@ page import= "java.awt.*" %>
 <%@ page import= "java.net.*" %>
-<jsp:include page="header.jsp" flush="false" />
+<jsp:include page="header.jsp"  />
 <% 
-
-
-try{
-
-final String APP_Key = "jv0xh2qyex8bbuf";
-final String APP_Secret= "izuo5z8eya4pfx8";
-RequestTokenPair Token = (RequestTokenPair)session.getAttribute("Token");
-WebAuthSession auth=(WebAuthSession)session.getAttribute("WebSession");
-auth.retrieveWebAccessToken(Token);
-
-//RequestTokenPair token=(RequestTokenPair)request.getParameter("oauth_token");
-//String secret=(String)request.getParameter("uid");
-//AccessTokenPair was=new AccessTokenPair(token,secret);
-//AppKeyPair appKeyPair = new AppKeyPair(APP_Key, APP_Secret);
-//WebAuthSession after = new WebAuthSession(appKeyPair, Session.AccessType.APP_FOLDER);
-//after.setAccessTokenPair(was);
-//auth.setAccessTokenPair(was);
-
-
-DropboxAPI<WebAuthSession> mdb = new DropboxAPI<WebAuthSession>(auth);
+//try{
+	
+DropboxAPI<WebAuthSession> mdb=(DropboxAPI<WebAuthSession>)session.getAttribute("Dropbox");
 DropboxAPI.Account account = mdb.accountInfo();
 String name=account.displayName;
 
-DropboxAPI.Entry mainlist=mdb.metadata("/",0, null, true, null);
+String path=(String)request.getParameter("path");
+
+
+DropboxAPI.Entry mainlist=mdb.metadata(path,0, null, true, null);
 List<DropboxAPI.Entry> list_0=mainlist.contents;
 
 
 out.println("User Name : "+name+"님 접속을 환영합니다.");
 out.println("\"");
 
-for(int i=0;i<list_0.size();i++)
-{
-	DropboxAPI.Entry Varsinfo=list_0.get(i);
-	String filename=Varsinfo.fileName();
-	if(Varsinfo.isDir){
-		out.println("<div class='post'>");
-		out.println("<h2>"+"fileName : "+filename+"</h2>");
-		out.println("<p>date : "+Varsinfo.clientMtime+"</p>");
-	    out.println("</div>");
-		
-	}
-	else{
-		 
-		out.println("<div class='post'>");
-		out.println("<h2>"+"fileName : "+filename+"</h2>");
-		out.println("<p>date : "+Varsinfo.clientMtime+"</p>");
-	    out.println("</div>");
 
+if(!path.equals("/")){
+	String parent_path=mainlist.parentPath();
+	out.println("<div class='post'>");
+	out.println("<h2><a href='/main_dropbox.jsp?path="+parent_path+"'>"+"Go to the Parent Directory</a></h2>");
+	//out.println("<p>date : "+Varsinfo.clientMtime+"</p>");
+    out.println("</div>");
+}
+if(list_0.size()==0)
+	out.println("<h2>Storage is Empty</h2>");
+else{
+	
+	for(int i=0;i<list_0.size();i++)
+	{
+		DropboxAPI.Entry Varsinfo=list_0.get(i);
+		String filename=Varsinfo.fileName();
+		if(Varsinfo.isDir){
+			String temp_path=Varsinfo.path;
+			out.println("<div class='post'>");
+			out.println("<h2><a href='/main_dropbox.jsp?path="+temp_path+"'>"+"DirName : "+filename+"</a></h2>");
+			out.println("<p>date : "+Varsinfo.clientMtime+"</p>");
+		    out.println("</div>");
+			
+		}
+		else{
+			java.util.Date a;
+			DropboxAPI.DropboxLink filelink=mdb.share(Varsinfo.path);
+			out.println("<div class='post'>");
+			out.println("<h2><a href='"+filelink.url+"'>"+"fileName : "+filename+"</a></h2>");
+			out.println("<p>date : "+Varsinfo.clientMtime+"</p>");
+		    out.println("</div>");
+	
+		}
 	}
+	
 }
 
-
-
-
-}catch(DropboxUnlinkedException e){
-	out.println("DropboxUnlinkedException");
-}catch(DropboxException e){
-	out.println("DropboxException");
-}
+//}catch(DropboxUnlinkedException e){
+//	out.println("DropboxUnlinkedException");
+//}catch(DropboxException e){
+//	out.println("DropboxException");
+//}
 
 
 %>

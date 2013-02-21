@@ -29,10 +29,12 @@
 try{
 	final String APP_Key = "jv0xh2qyex8bbuf";
 	final String APP_Secret= "izuo5z8eya4pfx8";
+	RequestTokenPair Token = (RequestTokenPair)session.getAttribute("Token");
+	
 	
 	AppKeyPair appKeyPair = new AppKeyPair(APP_Key, APP_Secret);
 	WebAuthSession was = new WebAuthSession(appKeyPair, Session.AccessType.APP_FOLDER);
-	WebAuthInfo info = was.getAuthInfo("http://dockingcloud.cloudfoundry.com/main_dropbox.jsp");
+	WebAuthInfo info = was.getAuthInfo("http://dockingcloud.cloudfoundry.com/connect_dropbox_continue.jsp");
 	RequestTokenPair pair=info.requestTokenPair;
 	session.setAttribute("Token",pair);
 	session.setAttribute("WebSession",was);
@@ -43,6 +45,7 @@ try{
 
 	
 	response.sendRedirect(url);
+	
 }catch(DropboxUnlinkedException e){
 	out.println("DropboxUnlinked Exception");
 }catch(DropboxException e){
