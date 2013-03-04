@@ -8,7 +8,7 @@
 			<td>
 				<div>
 					<form method="post" action="connect_box.jsp">
-						<input type="submit" value="submit"> 
+						<input class="btn btn-large btn-primary" type="submit" value="Box.net	연결"> 
 					</form>
 				</div>
 			</td>
@@ -18,7 +18,7 @@
 			<td>
 				<div>
 					<form method="post" action="connect_dropbox.jsp">
-						<input type="submit" value="submit"> 
+						<input class="btn btn-large btn-primary" type="submit" value="Drop Box	연결"> 
 					</form>
 				</div>
 			</td>
