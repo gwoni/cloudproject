@@ -64,6 +64,7 @@ else{
 			
 		}
 		else{
+			
 			java.util.Date a;
 			DropboxAPI.DropboxLink filelink=mdb.share(Varsinfo.path);
 			out.println("<div class='post'>");

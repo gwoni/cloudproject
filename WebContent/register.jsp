@@ -15,10 +15,10 @@
 
   <div class="container">
   	<form class="form-signin" action="process_register.jsp" method="post">
-  		<h2 class="form-signin-heading">블로그 가입</h2>
-  		<input type="text" name=id class="input-block-level" placeholder="사용자 ID">
-  		<input type="text" name=email class="input-block-level" placeholder="사용자 이메일">
-  		<input type="password" name=password class="input-block-level" placeholder="사용자 암호">
+  		<h2 class="form-signin-heading">Docking Cloud 가입</h2>
+  		<input type="text" name=main_id class="input-block-level" placeholder="사용자 Email">
+  		<input type="password" name=main_password class="input-block-level" placeholder="사용자 비밀번호">
+  		<input type="text" name=main_name class="input-block-level" placeholder="사용자 이름">
   		<button class="btn btn-large btn-primary" type="submit"> 가입 </button>
   	</form>
   </div>

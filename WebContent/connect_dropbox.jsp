@@ -24,27 +24,49 @@
 <%@ page import= "java.awt.*" %>
 <%@ page import= "java.net.*" %>
 
-
+<%@ page import="java.util.Date"%>
+<%@ page import="java.sql.*,javax.sql.*"%>
+<%@ page import="org.cloudfoundry.services.*"%>
 <%
 try{
 	final String APP_Key = "jv0xh2qyex8bbuf";
 	final String APP_Secret= "izuo5z8eya4pfx8";
-	RequestTokenPair Token = (RequestTokenPair)session.getAttribute("Token");
 	
+	ServiceManager services =ServiceManager.INSTANCE;
+	Connection conn = (Connection) services.getInstance(CloudFoundryServices.MYSQL);
+	Statement stmt =conn.createStatement();
+	String id=(String)session.getAttribute("loginid");
+	String sql="select access_key,access_secret from dropbox where main_id='"+id+"'";
+	String key=null,secret=null;
+	ResultSet rs=stmt.executeQuery(sql);
+	while(rs.next()){
+		key=rs.getString("access_key");
+		secret=rs.getString("access_secret");
+	}
 	
 	AppKeyPair appKeyPair = new AppKeyPair(APP_Key, APP_Secret);
-	WebAuthSession was = new WebAuthSession(appKeyPair, Session.AccessType.APP_FOLDER);
-	WebAuthInfo info = was.getAuthInfo("http://dockingcloud.cloudfoundry.com/connect_dropbox_continue.jsp");
-	RequestTokenPair pair=info.requestTokenPair;
-	session.setAttribute("Token",pair);
-	session.setAttribute("WebSession",was);
+	AccessTokenPair aut=new AccessTokenPair(key,secret);
+	WebAuthSession was = new WebAuthSession(appKeyPair, Session.AccessType.APP_FOLDER,aut);
+	
+	if(was.isLinked()==true){
+		DropboxAPI<WebAuthSession> mdb = new DropboxAPI<WebAuthSession>(was);
+		session.setAttribute("Dropbox",mdb);
+		String url="/main_dropbox.jsp?path=/";
+		response.sendRedirect(url);
+	}
+	else{
+		was=new WebAuthSession(appKeyPair,Session.AccessType.APP_FOLDER);
+		WebAuthInfo info = was.getAuthInfo("http://dockingcloud.cloudfoundry.com/connect_dropbox_continue.jsp");
+		RequestTokenPair pair=info.requestTokenPair;
+		session.setAttribute("Token",pair);
+		session.setAttribute("WebSession",was);
+		String url=info.url;
+		response.sendRedirect(url);
+	}
 	
 	
 	
-	String url=info.url;
-
 	
-	response.sendRedirect(url);
 	
 }catch(DropboxUnlinkedException e){
 	out.println("DropboxUnlinked Exception");

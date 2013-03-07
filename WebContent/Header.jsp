@@ -16,10 +16,10 @@
       <div class="navbar-inner">
         <div class="container">
         <%	
-        String id=(String)session.getAttribute("loginid");
-        if(id!=null){
+        String name=(String)session.getAttribute("loginid");
+        if(name!=null){
         %>
-          <a class="brand" href="#">AdminiStrator</a>
+          <a class="brand" href="#"><%=name %></a>
           <%}else{ %>
           <a class="brand" href="index.jsp">DockingCloud</a>
           <% } %>
@@ -32,9 +32,9 @@
             
         <%
         
-          if(id!=null){
+          if(name!=null){
         %>
-              <li><a href="process_logout.jsp"><%=id%>로그아웃</a></li>
+              <li><a href="process_logout.jsp">로그아웃</a></li>
              </ul>         
               <form class="navbar-search">
   				<div class="input-append">
@@ -49,8 +49,8 @@
              	 	<li><a href="register.jsp">아이디/비밀번호 찾기</a></li>
              	</ul>
         		<form class="navbar-form pull-right">
-             	 <input class="span2" type="text" placeholder="Email">
-             	 <input class="span2" type="password" placeholder="Password">
+             	 <input class="span2" type="text" placeholder="ID">
+             	 <input class="span2" type="password" placeholder="password">
              	 <button type="submit" class="btn"><a href="login.jsp">Sign in</a></button>
            		</form>
              	 

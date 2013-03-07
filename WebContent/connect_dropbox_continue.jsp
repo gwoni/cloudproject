@@ -22,10 +22,17 @@
 <%@ page import= "java.awt.*" %>
 <%@ page import= "java.net.*" %>
 
+<%@ page import="java.util.Date"%>
+<%@ page import="java.sql.*,javax.sql.*"%>
+<%@ page import="org.cloudfoundry.services.*"%>
 <% 
 
 try{
-
+	
+	ServiceManager services =ServiceManager.INSTANCE;
+	Connection conn = (Connection) services.getInstance(CloudFoundryServices.MYSQL);
+	Statement stmt =conn.createStatement();
+	
 final String APP_Key = "jv0xh2qyex8bbuf";
 final String APP_Secret= "izuo5z8eya4pfx8";
 RequestTokenPair Token = (RequestTokenPair)session.getAttribute("Token");
@@ -40,8 +47,13 @@ auth.retrieveWebAccessToken(Token);
 //after.setAccessTokenPair(was);
 //auth.setAccessTokenPair(was);
 
-
+String key=auth.getAccessTokenPair().key;
+String secret=auth.getAccessTokenPair().secret;
+String id=(String)session.getAttribute("loginid");
+String sql="UPDATE dropbox SET access_key='"+key+"', access_secret='"+secret+"' where main_id='"+id+"'";
+stmt.executeUpdate(sql);
 DropboxAPI<WebAuthSession> mdb = new DropboxAPI<WebAuthSession>(auth);
+
 session.setAttribute("Dropbox",mdb);
 String url="/main_dropbox.jsp?path=/";
 response.sendRedirect(url);

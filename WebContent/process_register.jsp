@@ -1,31 +1,37 @@
 <%@ page contentType="text/html;charset=utf-8" %>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.io.*"%>
-<%@page import="java.sql.*,javax.sql.*"%>
-<%@page import="org.cloudfoundry.services.*"%>
+<%@ page import="java.sql.*,javax.sql.*"%>
+<%@ page import="org.cloudfoundry.services.*"%>
+
 <%
-request.setCharacterEncoding("utf-8");
+	request.setCharacterEncoding("utf-8");
 %>
-<jsp:useBean id="member" class="thinkonweb.bean.Member"/>
-<jsp:setProperty name="member" property="*"/>
+
+<jsp:useBean id="member" class="thinkonweb.bean.Member" />
+<jsp:setProperty name="member" property="*" />
 <%
-	member.setId(request.getParameter("id"));
-	member.setPassword(request.getParameter("password"));
-	member.setEmail(request.getParameter("email"));
-	String sql="INSERT INTO users(username,password,email) VALUES('"+member.getId() + "','"+member.getPassword()+"','"+member.getEmail()+"');";
+	
+	
+	String sql="INSERT INTO users(main_id, main_password, main_name) VALUES('"+member.getMain_id() + "','"+member.getMain_password() + "','" + member.getMain_name() + "');";
+	String dropbox_sql="INSERT INTO dropbox(main_id, access_key, access_secret) VALUES('"+member.getMain_id() + "','"+member.getMain_password()+"','" + member.getMain_name() + "');";
+	
 	ServiceManager services =ServiceManager.INSTANCE;
 	Connection conn = (Connection) services.getInstance(CloudFoundryServices.MYSQL);
 	Statement stmt =conn.createStatement();
 	stmt.executeUpdate(sql);
-
-	session.setAttribute("loginid",member.getId());
-	response.sendRedirect("/");
+	stmt.executeUpdate(dropbox_sql);
+    
+	
+	session.setAttribute("loginid",member.getMain_id());
+	session.setAttribute("loginname",member.getMain_name());
+	response.sendRedirect("/connect.jsp");
 	
 
 	ResultSet rs=stmt.executeQuery("select * from users");
-	while(rs.next()){
-	out.println("user : "+rs.getString("username")+","+rs.getString("password")+"<br>");
-}
-	conn.close();
 	
+	while(rs.next()){
+		out.println("user : "+rs.getString("main_id")+","+rs.getString("main_password")+"<br>");
+	}
+	conn.close();
 %>

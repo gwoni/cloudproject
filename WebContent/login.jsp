@@ -16,8 +16,8 @@
   <div class="container">
   	<form class="form-signin" action="process_login.jsp" method="post">
   		<h2 class="form-signin-heading">Docking Cloud 로그인</h2>
-  		<input type="text" name=id class="input-block-level" placeholder="사용자 ID">
-  		<input type="password" name=password class="input-block-level" placeholder="사용자 암호">
+  		<input type="text" name=main_id class="input-block-level" placeholder="사용자 ID">
+  		<input type="password" name=main_password class="input-block-level" placeholder="사용자 암호">
   		<button class="btn btn-large btn-primary" type="submit"> 로그인 </button>
   	</form>
   	</div>
