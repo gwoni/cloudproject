@@ -6,6 +6,7 @@
 <jsp:useBean id="member" class="thinkonweb.bean.Member"/>
 <jsp:setProperty name="member" property="*" />
 
+
 <%
 	ServiceManager services =ServiceManager.INSTANCE;
 	Connection conn = (Connection) services.getInstance(CloudFoundryServices.MYSQL);

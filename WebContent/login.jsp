@@ -12,13 +12,39 @@
   }
   .form-signin .form-signin-heading{ margin-bottom: 10px;}
   .form-signin input{ font-size: 16px; height: auto; margin-bottom: 15px; padding: 7px 9px;}</style>
+<script type="text/javascript">
+<!--
+function validate() {
+    var formname=document.login_post;
+    var str=formname.main_id.value;
+	var str1=formname.main_password.value;
 
+	var message;
+	
+    if(str=="" || str1=="")
+    {
+    	if(str=="")
+    		formname.main_id.focus();
+    	else
+    		formname.main_password.focus();
+    	
+    	return false;
+    }
+    else
+    {
+    	formname.submit();
+    }
+    
+}
+
+//-->
+</script>
   <div class="container">
-  	<form class="form-signin" action="process_login.jsp" method="post">
+  	<form class="form-signin" action="process_login.jsp" method="post" name="login_post" onsubmit="return false">
   		<h2 class="form-signin-heading">Docking Cloud 로그인</h2>
-  		<input type="text" name=main_id class="input-block-level" placeholder="사용자 ID">
+  		<input type="text" name=main_id class="input-block-level" placeholder="사용자 ID" >
   		<input type="password" name=main_password class="input-block-level" placeholder="사용자 암호">
-  		<button class="btn btn-large btn-primary" type="submit"> 로그인 </button>
+  		<button class="btn btn-large btn-primary" type="submit" onClick="validate()"> 로그인 </button>
   	</form>
   	</div>
 
