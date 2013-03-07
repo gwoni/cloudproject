@@ -18,8 +18,6 @@ function validate() {
     var formname=document.login_post;
     var str=formname.main_id.value;
 	var str1=formname.main_password.value;
-
-	var message;
 	
     if(str=="" || str1=="")
     {
