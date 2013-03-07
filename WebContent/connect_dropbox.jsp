@@ -33,7 +33,7 @@ try{
 	final String APP_Secret= "izuo5z8eya4pfx8";
 	
 	ServiceManager services =ServiceManager.INSTANCE;
-	Connection conn = (Connection) services.getInstance(CloudFoundryServices.MYSQL);
+	Connection conn = (Connection) services.getInstance(ClodFoundryServices.MYSQL);
 	Statement stmt =conn.createStatement();
 	String id=(String)session.getAttribute("loginid");
 	String sql="select access_key,access_secret from dropbox where main_id='"+id+"'";

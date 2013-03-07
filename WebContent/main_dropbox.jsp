@@ -27,8 +27,8 @@
 	
 DropboxAPI<WebAuthSession> mdb=(DropboxAPI<WebAuthSession>)session.getAttribute("Dropbox");
 DropboxAPI.Account account = mdb.accountInfo();
-String name=account.displayName;
 
+String name=account.displayName;
 String path=(String)request.getParameter("path");
 
 
@@ -47,6 +47,7 @@ if(!path.equals("/")){
 	//out.println("<p>date : "+Varsinfo.clientMtime+"</p>");
     out.println("</div>");
 }
+
 if(list_0.size()==0)
 	out.println("<h2>Storage is Empty</h2>");
 else{

@@ -15,14 +15,8 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-        <%	
-        String name=(String)session.getAttribute("loginid");
-        if(name!=null){
-        %>
-          <a class="brand" href="#"><%=name %></a>
-          <%}else{ %>
           <a class="brand" href="index.jsp">DockingCloud</a>
-          <% } %>
+        
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="active"><a href="index.jsp">Home</a></li>
@@ -31,7 +25,7 @@
             <ul class="nav pull-right">
             
         <%
-        
+        String name=(String)session.getAttribute("loginid");
           if(name!=null){
         %>
               <li><a href="process_logout.jsp">로그아웃</a></li>
