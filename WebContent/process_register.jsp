@@ -13,7 +13,7 @@
 <%
 	
 	
-	String sql="INSERT INTO users(main_id, main_password, main_name) VALUES('"+member.getMain_id() + "','"+member.getMain_password() + "','" + member.getMain_name() + "');";
+	String sql="INSERT INTO users(main_id, main_password, main_name) VALUES('"+member.getMain_id() + "','"+member.getMain_password() + "','" +member.getMain_name() + "');";
 	String dropbox_sql="INSERT INTO dropbox(main_id, access_key, access_secret) VALUES('"+member.getMain_id() + "','"+member.getMain_password()+"','" + member.getMain_name() + "');";
 	
 	ServiceManager services =ServiceManager.INSTANCE;

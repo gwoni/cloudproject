@@ -1,7 +1,7 @@
 <%@page contentType="text/html;charset=utf-8" %>
 
 <jsp:include page="header.jsp" flush="false" />
-
+<script language="JavaScript" src="/js/script.js"></script>
   <style type="text/css">`
   body { padding-top: 80px; padding-botton: 40px; background-color: #f5f5f5;}
 
@@ -12,31 +12,8 @@
   }
   .form-signin .form-signin-heading{ margin-bottom: 10px;}
   .form-signin input{ font-size: 16px; height: auto; margin-bottom: 15px; padding: 7px 9px;}</style>
-<script type="text/javascript">
-<!--
-function validate() {
-    var formname=document.login_post;
-    var str=formname.main_id.value;
-	var str1=formname.main_password.value;
-	
-    if(str=="" || str1=="")
-    {
-    	if(str=="")
-    		formname.main_id.focus();
-    	else
-    		formname.main_password.focus();
-    	
-    	return false;
-    }
-    else
-    {
-    	formname.submit();
-    }
-    
-}
 
-//-->
-</script>
+
   <div class="container">
   	<form class="form-signin" action="process_login.jsp" method="post" name="login_post" onsubmit="return false">
   		<h2 class="form-signin-heading">Docking Cloud 로그인</h2>
