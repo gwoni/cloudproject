@@ -1,5 +1,5 @@
-<%@page contentType="text/html;charset=utf-8" %>
-<%@page import="java.sql.*,javax.sql.*"%>
+<%@ page contentType="text/html;charset=utf-8" %>
+<%@ page import="java.sql.*,javax.sql.*"%>
 <%@ page import="org.cloudfoundry.services.*" %>
 
 <html>

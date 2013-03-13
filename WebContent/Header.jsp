@@ -19,23 +19,37 @@
         
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="index.jsp">Home</a></li>
-              <li><a href="about.jsp">About</a></li>
+              <li><a href="index.jsp"><strong>HOME</strong></a></li>
+              <li><a href="about.jsp"><strong>ABOUT</strong></a></li>
             </ul>
-            <ul class="nav pull-right">
-            
-        <%
+       <%
         String name=(String)session.getAttribute("loginid");
           if(name!=null){
-        %>
-              <li><a href="process_logout.jsp">로그아웃</a></li>
-             </ul>         
-              <form class="navbar-search">
+		%>
+		         
+
+	        <ul class="nav pull-right">
+	          <form class="navbar-search">
   				<div class="input-append">
    				 <input type="text" class="span2 search">
    				 <button type="submit" class="btn">Search</button>
  				</div>
  			  </form>
+	          <li><a href="setting.jsp">SETTING</a></li>
+	          <li><a href="process_logout.jsp">로그아웃</a></li>
+	          <div class="btn-group">
+ 				 <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> User</a>
+ 				 <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+ 				 <ul class="dropdown-menu">
+  				  <li><a href="#"><i class="icon-pencil"></i> 연결하기</a></li>
+    			  <li><a href="#"><i class="icon-trash"></i> 삭제하기</a></li>
+    			  <li><a href="#"><i class="icon-ban-circle"></i> 탈퇴하기</a></li>
+    			  <li class="divider"></li>
+    			  <li><a href="#"><i class="i"></i> Make admin</a></li>
+ 				 </ul>
+			  </div>
+            </ul>         
+              
  			  
         <% } else { %>
         		<ul class="navbar-text pull-right">
