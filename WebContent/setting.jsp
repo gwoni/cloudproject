@@ -32,6 +32,22 @@
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
+        
+        <div class = "span6">
+        	<div class="widget">
+        		<div class ="widget-header">
+        			<i class ="icon-bookmark"></i>
+        			<h3>연결한 클라우드를 선택해주세요</h3>
+        		</div>
+        		<div class="widget-content">
+        			<div class ="shortcuts">
+        				<a href="javascript:;" class= "shortcut"> <i class="shortcut-icon icon-list-alt"></i> <span class="shortcut-label">dropbox</span></a>
+        				<a href="javascript:;" class= "shortcut"> <i class="shortcut-icon icon-list-alt"></i> <span class="shortcut-label">box.net</span></a>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+        
        </div>
 </div>
 

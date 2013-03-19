@@ -39,16 +39,25 @@ try{
 	String sql="select access_key,access_secret from dropbox where main_id='"+id+"'";
 	String key=null,secret=null;
 	ResultSet rs=stmt.executeQuery(sql);
+	WebAuthSession was;
+	AppKeyPair appKeyPair;
 	while(rs.next()){
 		key=rs.getString("access_key");
 		secret=rs.getString("access_secret");
 	}
+	if(key==null || secret==null)
+	{
+		appKeyPair = new AppKeyPair(APP_Key, APP_Secret);
+		 was = new WebAuthSession(appKeyPair, Session.AccessType.APP_FOLDER);
+		
+	}
+	else{
+		appKeyPair = new AppKeyPair(APP_Key, APP_Secret);
+		AccessTokenPair aut=new AccessTokenPair(key,secret);
+		 was = new WebAuthSession(appKeyPair, Session.AccessType.APP_FOLDER,aut);
+	}
 	
-	AppKeyPair appKeyPair = new AppKeyPair(APP_Key, APP_Secret);
-	AccessTokenPair aut=new AccessTokenPair(key,secret);
-	WebAuthSession was = new WebAuthSession(appKeyPair, Session.AccessType.APP_FOLDER,aut);
-	
-	if(was.isLinked()==true){
+	if(was.isLinked()==false){
 		DropboxAPI<WebAuthSession> mdb = new DropboxAPI<WebAuthSession>(was);
 		session.setAttribute("Dropbox",mdb);
 		String url="/main_dropbox.jsp?path=/";
