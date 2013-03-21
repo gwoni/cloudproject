@@ -59,6 +59,10 @@ String url="/main_dropbox.jsp?path=/";
 response.sendRedirect(url);
 
 
+stmt.close();
+conn.close();
+
+
 }catch(DropboxUnlinkedException e){
 	out.println("DropboxUnlinkedException");
 }catch(DropboxException e){

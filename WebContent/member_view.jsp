@@ -42,6 +42,7 @@
 				member.setMain_name(rs.getString("main_name"));
 				vecList.add(member);
 			}
+			conn.close();
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}finally{

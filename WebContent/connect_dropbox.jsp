@@ -45,6 +45,7 @@ try{
 		key=rs.getString("access_key");
 		secret=rs.getString("access_secret");
 	}
+	out.println(key+" "+secret);
 	if(key==null || secret==null)
 	{
 		appKeyPair = new AppKeyPair(APP_Key, APP_Secret);
@@ -71,10 +72,12 @@ try{
 		session.setAttribute("WebSession",was);
 		String url=info.url;
 		response.sendRedirect(url);
+		out.println(url);
 	}
 	
 	
-	
+	stmt.close();
+	conn.close();
 	
 	
 }catch(DropboxUnlinkedException e){
