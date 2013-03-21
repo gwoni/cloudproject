@@ -8,8 +8,8 @@
 
 
 <%
-	ServiceManager services =ServiceManager.INSTANCE;
-	Connection conn = (Connection) services.getInstance(CloudFoundryServices.MYSQL);
+	ServiceManager services=ServiceManager.INSTANCE;
+	Connection conn=(Connection)services.getInstance(CloudFoundryServices.MYSQL);
 
 	Statement stmt=conn.createStatement();
 	String sql = "select count(*) as cnt from users where main_id='" + member.getMain_id() + "' and main_password='"+member.getMain_password()+"';";
