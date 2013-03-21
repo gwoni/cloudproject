@@ -16,6 +16,7 @@
 		msg=rs.getString("msg");
 	rs.close();
 	pstmt.close();
+	conn.close();
 %>
 
 쿼리문		: <%=sql %><br/>

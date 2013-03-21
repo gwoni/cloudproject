@@ -8,7 +8,7 @@
 	request.setCharacterEncoding("utf-8");
 %>
 
-<jsp:useBean id="member" class="thinkonweb.bean.Member" />
+<jsp:useBean id="member" class="thinkonweb.bean.Member" scope="page"/>
 <jsp:setProperty name="member" property="*" />
 <%
 	
@@ -25,6 +25,7 @@
 	
 	session.setAttribute("loginid",member.getMain_id());
 	session.setAttribute("loginname",member.getMain_name());
+	
 	response.sendRedirect("/connect.jsp");
 	
 
@@ -33,5 +34,7 @@
 	while(rs.next()){
 		out.println("user : "+rs.getString("main_id")+","+rs.getString("main_password")+"<br>");
 	}
+	stmt.close();
 	conn.close();
+	
 %>

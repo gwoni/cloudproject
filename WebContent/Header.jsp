@@ -14,13 +14,14 @@
     <link href="http://wbpreview.com/previews/WB00U99JJ/css/font-awesome.css" rel="stylesheet">
     
     <link href="http://wbpreview.com/previews/WB00U99JJ/css/base-admin-responsive.css" rel="stylesheet">
-   
-    
+   <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
   	<script src="/js/bootstrap.js" type="text/javascript"></script>
-  	<script src="/js/bootstrap-modal.js" type="text/javascript"></script>
+ 	<script src="/js/bootstrap-modal.js" type="text/javascript"></script>
    	<script src="/js/bootstrap-modalmanager.js" type="text/javascript"></script>
-   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+   	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    
+ 
     	
     <style> body {padding-top: 60px;padding-bottom: 40px; } </style>
     <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -54,13 +55,14 @@
  			  </form>
  			  <li><a href="#"><strong>  </strong></a></li>
 	          <div class="btn-group">
+	          
+	          
  				 <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> User</a>
  				 <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
  				 <ul class="dropdown-menu">
  				 
  			
  				<button class="demo btn btn-primary btn-large" data-toggle="modal" href="#static">View Demo</button>
-
 				<div id="static" class="modal hide fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
   					<div class="modal-body">
    					 <p>Would you like to continue with some arbitrary task?</p>
@@ -70,6 +72,7 @@
    				 <button type="button" data-dismiss="modal" class="btn btn-primary">Continue Task</button>
  				 </div>
 			    </div>
+				
           
 				
 					

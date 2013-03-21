@@ -32,6 +32,7 @@
 	rs.close();
 	stmt.close();
 	conn.close();
+	
 %>
 
 	쿼리문: <%=sql %><br/>
