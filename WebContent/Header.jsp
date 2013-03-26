@@ -39,6 +39,7 @@
             <ul class="nav">
               <li><a href="index.jsp"><strong>HOME</strong></a></li>
               <li><a href="about.jsp"><strong>ABOUT</strong></a></li>
+              <li><a href="FAQ.jsp"><strong>FAQ</strong></a></li>
             </ul>
        <%
         String name=(String)session.getAttribute("loginid");
