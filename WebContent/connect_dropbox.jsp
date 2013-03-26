@@ -4,7 +4,7 @@
 <%@ page import="com.dropbox.client2.exception.DropboxException" %>
 <%@ page import="com.dropbox.client2.session.Session" %>
 <%@ page import="com.dropbox.client2.exception.*" %>
-<%@ page import="com.dropbox.client2.session.WebAuthSession" %>
+<%@ page import="com.dropbox.client2.session.*" %>
 <%@ page import="com.dropbox.client2.session.WebAuthSession.WebAuthInfo" %>
 <%@ page import="com.dropbox.client2.session.AppKeyPair" %>
 <%@ page import="com.dropbox.client2.session.AccessTokenPair" %>
@@ -48,15 +48,16 @@ try{
 	out.println(key+" "+secret);
 	if(key==null || secret==null)
 	{
-		appKeyPair = new AppKeyPair(APP_Key, APP_Secret);
+		 appKeyPair = new AppKeyPair(APP_Key, APP_Secret);
 		 was = new WebAuthSession(appKeyPair, Session.AccessType.APP_FOLDER);
-		
 	}
 	else{
 		appKeyPair = new AppKeyPair(APP_Key, APP_Secret);
 		AccessTokenPair aut=new AccessTokenPair(key,secret);
 		 was = new WebAuthSession(appKeyPair, Session.AccessType.APP_FOLDER,aut);
 	}
+	
+	out.println(was.isLinked());
 	
 	if(was.isLinked()==false){
 		DropboxAPI<WebAuthSession> mdb = new DropboxAPI<WebAuthSession>(was);
@@ -72,7 +73,7 @@ try{
 		session.setAttribute("WebSession",was);
 		String url=info.url;
 		response.sendRedirect(url);
-		out.println(url);
+		//out.println(url);
 	}
 	
 	

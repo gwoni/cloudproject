@@ -39,6 +39,8 @@ RequestTokenPair Token = (RequestTokenPair)session.getAttribute("Token");
 WebAuthSession auth=(WebAuthSession)session.getAttribute("WebSession");
 auth.retrieveWebAccessToken(Token);
 
+
+
 //RequestTokenPair token=(RequestTokenPair)request.getParameter("oauth_token");
 //String secret=(String)request.getParameter("uid");
 //AccessTokenPair was=new AccessTokenPair(token,secret);
@@ -46,6 +48,8 @@ auth.retrieveWebAccessToken(Token);
 //WebAuthSession after = new WebAuthSession(appKeyPair, Session.AccessType.APP_FOLDER);
 //after.setAccessTokenPair(was);
 //auth.setAccessTokenPair(was);
+
+
 
 String key=auth.getAccessTokenPair().key;
 String secret=auth.getAccessTokenPair().secret;
@@ -65,6 +69,7 @@ conn.close();
 
 }catch(DropboxUnlinkedException e){
 	out.println("DropboxUnlinkedException");
+	response.sendRedirect("/setting.jsp");
 }catch(DropboxException e){
 	out.println("DropboxException");
 }
