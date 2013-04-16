@@ -87,6 +87,9 @@ else{
 
 %>
 
+
+<jsp:include page="userMain.jsp" flush="false" />
+
 <jsp:include page="footer.jsp"  />
 
 

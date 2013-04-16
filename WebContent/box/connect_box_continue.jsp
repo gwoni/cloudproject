@@ -25,43 +25,34 @@
 <%@ page import= "java.net.*" %>
 
 <%
-	String API_KEY=application.getInitParameter("bnetAppKey");
 	BoxExternalAPI iBoxExternalAPI = new SimpleBoxImpl();
+	String API_KEY=application.getInitParameter("bnetAppKey");
+	
+	String TICKET;	
+	
+	GetTicketRequest getTicketRequest = BoxRequestFactory.createGetTicketRequest(API_KEY);
+    GetTicketResponse getTicketResponse = iBoxExternalAPI.getTicket(getTicketRequest);
+
+    TICKET=getTicketResponse.getTicket();
+    
+    GetAuthTokenRequest getAuthTokenRequest = BoxRequestFactory.createGetAuthTokenRequest(API_KEY, getTicketResponse.getTicket());
+    GetAuthTokenResponse getAuthTokenResponse = iBoxExternalAPI.getAuthToken(getAuthTokenRequest);      
+    
+    String authToken = getAuthTokenResponse.getAuthToken();
+    
+//	Fix it from here
+
+	String[] params = { "nozip" };
+	GetAccountTreeRequest getAccountTreeRequest = BoxRequestFactory.createGetAccountTreeRequest(API_KEY, authToken, "0", params);
+	iBoxExternalAPI.getAccountTree(getAccountTreeRequest);
 %>
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Box.net OAuth</title>
+<title>Connect Box.net continue</title>
 </head>
 <body>
-
-<%
-	String TICKET;
-
-	try {
-			
-		GetTicketRequest getTicketRequest = BoxRequestFactory.createGetTicketRequest(API_KEY);
-		GetTicketResponse getTicketResponse = iBoxExternalAPI.getTicket(getTicketRequest);
-		
-		TICKET=getTicketResponse.getTicket();
-		String URL="http://www.box.net/api/1.0/auth/"+TICKET;
-
-		response.sendRedirect(URL);
-    	GetAuthTokenRequest getAuthTokenRequest = BoxRequestFactory.createGetAuthTokenRequest(API_KEY, getTicketResponse.getTicket());
-	    GetAuthTokenResponse getAuthTokenResponse = iBoxExternalAPI.getAuthToken(getAuthTokenRequest);
-%>
-<%
-
-	    if (BoxConstant.STATUS_NOT_LOGGED_IN.equals(getAuthTokenResponse.getStatus()))
-	     	   	return;
-    	    
-	    String authToken = getAuthTokenResponse.getAuthToken();
-	    
-		}catch(Exception e){
-	    	e.printStackTrace();
-	}    	
-%>
 
 </body>
 </html>

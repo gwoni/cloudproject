@@ -59,7 +59,7 @@ try{
 	
 	out.println(was.isLinked());
 	
-	if(was.isLinked()==false){
+	if(was.isLinked()==true){
 		DropboxAPI<WebAuthSession> mdb = new DropboxAPI<WebAuthSession>(was);
 		session.setAttribute("Dropbox",mdb);
 		String url="/main_dropbox.jsp?path=/";

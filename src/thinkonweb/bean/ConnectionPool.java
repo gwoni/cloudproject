@@ -23,8 +23,32 @@ public class ConnectionPool {
 		}		
 	}
 	
+	public static synchronized ConnectionPool getInstance() throws Exception {
+		if(cp==null) {
+			cp=new ConnectionPool(4, 20);
+		}
+		
+		return cp;
+	}
+	
+	public synchronized Connection getConnection() throws Exception {
+		Connection conn=null;
+		
+		while((conn=getPooledConnection())==null){
+			try{
+				wait();
+			}catch(InterruptedException ie){
+				
+			}
+		}
+		
+		users++;
+		return conn;
+	}
+	
 	public synchronized void releaseConnection(Connection conn) {
 		pool.add(conn);
+		
 		users--;
 		notifyAll();
 	}

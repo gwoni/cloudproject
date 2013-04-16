@@ -10,8 +10,8 @@
               
               <li class="active"><a href="#">Docking Cloud</a></li>
               <li class="nav-header">My cloud</li>
-              <li><a href="connect_box.jsp">Box.net</a></li>
-              <li><a href="connect_dropbox.jsp">Dropbox</a></li>
+              <li><a href="box/connect_box.jsp">Box.net</a></li>
+              <li><a href="dropbox/connect_dropbox.jsp">Dropbox</a></li>
               <li><a href="#">Google</a></li>
               <li><a href="#">4shared</a></li>
               <li><a href="#">ucloud</a></li>
