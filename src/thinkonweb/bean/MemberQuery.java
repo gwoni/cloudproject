@@ -5,8 +5,7 @@ import java.util.*;
 import thinkonweb.bean.*;
 
 public class MemberQuery {
-	String str_mem="member";
-	
+
 	ConnectionPool pool=null;
 	
 	public MemberQuery(){
@@ -39,6 +38,39 @@ public class MemberQuery {
 			ex.printStackTrace();
 		}
 		stat.close();
+		pool.releaseConnection(conn);
+	}
+	
+	public void memberDelete(String main_id) throws Exception {
+		Connection conn=pool.getConnection();
+		Statement stmt1=conn.createStatement();
+		Statement stmt2=conn.createStatement();
+		
+		String sql;
+		String dropbox_sql;		
+		
+		try{
+			String drop_id=main_id;
+			
+			sql="delete from users where main_id='"+drop_id+"';";
+					
+			sql=new String(sql.getBytes("8859_1"), "euc-kr");
+			
+			dropbox_sql="delete from dropbox where main_id='"+drop_id+"';";
+			dropbox_sql=new String(sql.getBytes("8859_1"), "euc-kr");
+			
+			
+			stmt1.executeUpdate(sql);
+			stmt1.executeUpdate(dropbox_sql);
+			
+			stmt2.executeQuery(sql);
+			stmt2.executeQuery(dropbox_sql);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		stmt1.close();
+		stmt2.close();
 		pool.releaseConnection(conn);
 	}
 }

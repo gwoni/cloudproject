@@ -4,23 +4,18 @@
 <%@ page import="com.dropbox.client2.session.*" %>
 
 <%
-	
-DropboxAPI<WebAuthSession> mdb=(DropboxAPI<WebAuthSession>)session.getAttribute("Dropbox");
-
-
-if(mdb!=null){
- if(mdb.getSession().isLinked()==true ){
-	 mdb.getSession().unlink();
-	
- }
- 	
-}
+	DropboxAPI<WebAuthSession> mdb=(DropboxAPI<WebAuthSession>)session.getAttribute("Dropbox");
+	if(mdb!=null){
+ 		if(mdb.getSession().isLinked()==true ){
+	 		mdb.getSession().unlink();
+	 	}
+ 	}
 
  	
 
 	session.invalidate();
-	//response.Direct("https://www.dropbox.com/logout");
+	//response.sendRedirect("https://www.dropbox.com/logout");
 	
-	response.sendRedirect("/login.jsp");
+	response.sendRedirect("/index.jsp");
 	
 %>

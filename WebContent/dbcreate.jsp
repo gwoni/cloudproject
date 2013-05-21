@@ -12,12 +12,21 @@
 	ServiceManager services =ServiceManager.INSTANCE;
 	Connection conn = (Connection) services.getInstance(CloudFoundryServices.MYSQL);
 	Statement stmt =conn.createStatement();
+
+
 	
 	
+	//stmt.executeUpdate("CREATE TABLE files(file_name varchar(20), file_size bigint(20), file_date varchar(35), file_path varchar(20), file_storage varchar(20) ,main_id varchar(20),parent varchar(20), FOREIGN KEY(main_id) REFERENCES users, PRIMARY KEY(main_id, file_path)) DEFAULT CHARSET=utf8;");
+	
+		
+	
+
+	//stmt.executeUpdate("DROP TABLE files");
 	ResultSet rs=stmt.executeQuery("show tables");
 	while(rs.next()){
 		out.println("table : " + rs.getString(1) + "<br>");	
 	}
+	
 	
 	//while(rs.next()){
 	//	out.println("table : " + rs.getString(1) + "<br>");

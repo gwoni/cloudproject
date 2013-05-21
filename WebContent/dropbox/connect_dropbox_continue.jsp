@@ -33,39 +33,34 @@ try{
 	Connection conn = (Connection) services.getInstance(CloudFoundryServices.MYSQL);
 	Statement stmt =conn.createStatement();
 	
-final String APP_Key = "jv0xh2qyex8bbuf";
-final String APP_Secret= "izuo5z8eya4pfx8";
-RequestTokenPair Token = (RequestTokenPair)session.getAttribute("Token");
-WebAuthSession auth=(WebAuthSession)session.getAttribute("WebSession");
-auth.retrieveWebAccessToken(Token);
+	final String APP_Key = "jv0xh2qyex8bbuf";
+	final String APP_Secret= "izuo5z8eya4pfx8";
+	RequestTokenPair Token = (RequestTokenPair)session.getAttribute("Token");
+	WebAuthSession auth=(WebAuthSession)session.getAttribute("WebSession");
+	auth.retrieveWebAccessToken(Token);
 
+	//RequestTokenPair token=(RequestTokenPair)request.getParameter("oauth_token");
+	//String secret=(String)request.getParameter("uid");
+	//AccessTokenPair was=new AccessTokenPair(token,secret);
+	//AppKeyPair appKeyPair = new AppKeyPair(APP_Key, APP_Secret);
+	//WebAuthSession after = new WebAuthSession(appKeyPair, Session.AccessType.APP_FOLDER);
+	//after.setAccessTokenPair(was);
+	//auth.setAccessTokenPair(was);
+	
+	String key=auth.getAccessTokenPair().key;
+	String secret=auth.getAccessTokenPair().secret;
+	String id=(String)session.getAttribute("loginid");
+	String sql="UPDATE dropbox SET access_key='"+key+"', access_secret='"+secret+"' where main_id='"+id+"'";
+	stmt.executeUpdate(sql);
+	DropboxAPI<WebAuthSession> mdb = new DropboxAPI<WebAuthSession>(auth);
 
+	session.setAttribute("Dropbox",mdb);
+	session.setAttribute("Dropbox_path","/");
+	String url="/connect.jsp";
+	response.sendRedirect(url);
 
-//RequestTokenPair token=(RequestTokenPair)request.getParameter("oauth_token");
-//String secret=(String)request.getParameter("uid");
-//AccessTokenPair was=new AccessTokenPair(token,secret);
-//AppKeyPair appKeyPair = new AppKeyPair(APP_Key, APP_Secret);
-//WebAuthSession after = new WebAuthSession(appKeyPair, Session.AccessType.APP_FOLDER);
-//after.setAccessTokenPair(was);
-//auth.setAccessTokenPair(was);
-
-
-
-String key=auth.getAccessTokenPair().key;
-String secret=auth.getAccessTokenPair().secret;
-String id=(String)session.getAttribute("loginid");
-String sql="UPDATE dropbox SET access_key='"+key+"', access_secret='"+secret+"' where main_id='"+id+"'";
-stmt.executeUpdate(sql);
-DropboxAPI<WebAuthSession> mdb = new DropboxAPI<WebAuthSession>(auth);
-
-session.setAttribute("Dropbox",mdb);
-String url="/main_dropbox.jsp?path=/";
-response.sendRedirect(url);
-
-
-stmt.close();
-conn.close();
-
+	stmt.close();
+	conn.close();
 
 }catch(DropboxUnlinkedException e){
 	out.println("DropboxUnlinkedException");

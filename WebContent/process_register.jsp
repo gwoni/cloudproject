@@ -17,6 +17,8 @@
 
 	session.setAttribute("loginid", member.getMain_id());
 	session.setAttribute("loginname", member.getMain_name());
+	boolean dropbox_update = false;
+	session.setAttribute("Dropbox_update",dropbox_update);
 		
 	response.sendRedirect("/connect.jsp");
 %>

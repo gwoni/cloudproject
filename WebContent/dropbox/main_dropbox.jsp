@@ -21,7 +21,7 @@
 <%@ page import= "java.util.Map" %>
 <%@ page import= "java.awt.*" %>
 <%@ page import= "java.net.*" %>
-<jsp:include page="header.jsp"  />
+
 <% 
 //try{
 	
@@ -29,51 +29,46 @@ DropboxAPI<WebAuthSession> mdb=(DropboxAPI<WebAuthSession>)session.getAttribute(
 DropboxAPI.Account account = mdb.accountInfo();
 
 String name=account.displayName;
-String path=(String)request.getParameter("path");
+String path=(String)session.getAttribute("Dropbox_path");
 
 
 DropboxAPI.Entry mainlist=mdb.metadata(path,0, null, true, null);
 List<DropboxAPI.Entry> list_0=mainlist.contents;
 
 
-out.println("User Name : "+name+"님 접속을 환영합니다.");
-out.println("\"");
-
-
-if(!path.equals("/")){
-	String parent_path=mainlist.parentPath();
-	out.println("<div class='post'>");
-	out.println("<h2><a href='/main_dropbox.jsp?path="+parent_path+"'>"+"Go to the Parent Directory</a></h2>");
-	//out.println("<p>date : "+Varsinfo.clientMtime+"</p>");
-    out.println("</div>");
-}
 
 if(list_0.size()==0)
-	out.println("<h2>Storage is Empty</h2>");
+{
+	out.println("<tr>");
+	out.println("<td>dropbox</td>");
+	out.println("<td>Storage is Empty</td>");
+	out.println("<td class='td-actions'>");
+    out.println("<a href='javascript:;' class='btn btn-small btn-warning'>");
+    out.println("<i class='btn-icon-only icon-ok'></i></a>");
+    out.println("<a href='javascript:;' class='btn btn-small'>");
+    out.println("<i class='btn-icon-only icon-ok'></i></a></td>");
+    out.println("</tr>");
+}
 else{
 	
 	for(int i=0;i<list_0.size();i++)
 	{
 		DropboxAPI.Entry Varsinfo=list_0.get(i);
 		String filename=Varsinfo.fileName();
-		if(Varsinfo.isDir){
+		
 			String temp_path=Varsinfo.path;
-			out.println("<div class='post'>");
-			out.println("<h2><a href='/main_dropbox.jsp?path="+temp_path+"'>"+"DirName : "+filename+"</a></h2>");
-			out.println("<p>date : "+Varsinfo.clientMtime+"</p>");
-		    out.println("</div>");
+			out.println("<tr>");
+			out.println("<td>dropbox</td>");
+			out.println("<td>"+filename+"</td>");
+			out.println("<td class='td-actions'>");
+		    out.println("<a href='javascript:;' class='btn btn-small btn-warning'>");
+		    out.println("<i class='btn-icon-only icon-ok'></i></a>");
+		    out.println("<a href='javascript:;' class='btn btn-small'>");
+		    out.println("<i class='btn-icon-only icon-ok'></i></a></td>");
+		    out.println("</tr>");
 			
-		}
-		else{
-			
-			java.util.Date a;
-			DropboxAPI.DropboxLink filelink=mdb.share(Varsinfo.path);
-			out.println("<div class='post'>");
-			out.println("<h2><a href='"+filelink.url+"'>"+"fileName : "+filename+"</a></h2>");
-			out.println("<p>date : "+Varsinfo.clientMtime+"</p>");
-		    out.println("</div>");
-	
-		}
+		
+		
 	}
 	
 }
@@ -88,9 +83,7 @@ else{
 %>
 
 
-<jsp:include page="userMain.jsp" flush="false" />
 
-<jsp:include page="footer.jsp"  />
 
 
 

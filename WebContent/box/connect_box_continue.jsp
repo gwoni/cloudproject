@@ -1,10 +1,15 @@
+<%@page import="cn.com.believer.songyuanframework.openapi.storage.box.functions.GetAccountTreeResponse"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%@ page import="cn.com.believer.songyuanframework.openapi.storage.box.BoxExternalAPI" %>
 <%@ page import="cn.com.believer.songyuanframework.openapi.storage.box.constant.BoxConstant" %>
 <%@ page import="cn.com.believer.songyuanframework.openapi.storage.box.factories.BoxRequestFactory" %>
+<%@ page import="cn.com.believer.songyuanframework.openapi.storage.box.functions.GetAccountInfoRequest" %>
+<%@ page import="cn.com.believer.songyuanframework.openapi.storage.box.functions.GetAccountInfoRequest" %>
+<%@ page import="cn.com.believer.songyuanframework.openapi.storage.box.functions.GetAccountInfoResponse" %>
 <%@ page import="cn.com.believer.songyuanframework.openapi.storage.box.functions.GetAccountTreeRequest" %>
 <%@ page import="cn.com.believer.songyuanframework.openapi.storage.box.functions.GetAccountTreeRequest" %>
 <%@ page import="cn.com.believer.songyuanframework.openapi.storage.box.functions.GetAuthTokenRequest" %>
@@ -14,6 +19,8 @@
 <%@ page import="cn.com.believer.songyuanframework.openapi.storage.box.functions.LogoutRequest" %>
 <%@ page import="cn.com.believer.songyuanframework.openapi.storage.box.impl.simple.SimpleBoxImpl" %>
 <%@ page import="cn.com.believer.songyuanframework.openapi.storage.box.objects.BoxException" %>
+
+
 
 <%@ page import="org.apache.log4j.Logger" %>
 
@@ -29,22 +36,39 @@
 	String API_KEY=application.getInitParameter("bnetAppKey");
 	
 	String TICKET;	
-	
-	GetTicketRequest getTicketRequest = BoxRequestFactory.createGetTicketRequest(API_KEY);
-    GetTicketResponse getTicketResponse = iBoxExternalAPI.getTicket(getTicketRequest);
+    
+    try{
+    	GetTicketRequest getTicketRequest = BoxRequestFactory.createGetTicketRequest(API_KEY);
+        GetTicketResponse getTicketResponse = iBoxExternalAPI.getTicket(getTicketRequest);
+        
+        TICKET=getTicketResponse.getTicket();
+        
+        GetAuthTokenRequest getAuthTokenRequest = BoxRequestFactory.createGetAuthTokenRequest(API_KEY, TICKET);
+        GetAuthTokenResponse getAuthTokenResponse = iBoxExternalAPI.getAuthToken(getAuthTokenRequest);
 
-    TICKET=getTicketResponse.getTicket();
-    
-    GetAuthTokenRequest getAuthTokenRequest = BoxRequestFactory.createGetAuthTokenRequest(API_KEY, getTicketResponse.getTicket());
-    GetAuthTokenResponse getAuthTokenResponse = iBoxExternalAPI.getAuthToken(getAuthTokenRequest);      
-    
-    String authToken = getAuthTokenResponse.getAuthToken();
-    
-//	Fix it from here
+        if (BoxConstant.STATUS_NOT_LOGGED_IN.equals(getAuthTokenResponse.getStatus())) {
+            return;
+        }
+        String authToken = getAuthTokenResponse.getAuthToken();
+        
+        String[] params = { "nozip", "simple" };
+        GetAccountTreeRequest getAccountTreeRequest = BoxRequestFactory.createGetAccountTreeRequest(API_KEY, authToken, "0", params);
+        
+        GetAccountTreeResponse getAccountTreeResponse=iBoxExternalAPI.getAccountTree(getAccountTreeRequest);
+        
+        
+        System.out.println(getAccountTreeResponse.getStatus());
 
-	String[] params = { "nozip" };
-	GetAccountTreeRequest getAccountTreeRequest = BoxRequestFactory.createGetAccountTreeRequest(API_KEY, authToken, "0", params);
-	iBoxExternalAPI.getAccountTree(getAccountTreeRequest);
+        // test get_account_info
+        GetAccountInfoRequest getAccountInfoRequest = BoxRequestFactory.createGetAccountInfoRequest(API_KEY,
+                authToken);
+        GetAccountInfoResponse getAccountInfoResponse = iBoxExternalAPI.getAccountInfo(getAccountInfoRequest);
+
+        System.out.println(getAccountInfoResponse.getStatus());
+        
+    }catch(Exception ex){
+    	
+    }
 %>
 
 <html>

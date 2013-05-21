@@ -1,4 +1,16 @@
 <%@page contentType="text/html;charset=utf-8" %>
+<%@ page import="com.dropbox.client2.session.*" %>
+<%@ page import= "com.dropbox.client2.DropboxAPI" %>
+<%
+DropboxAPI<WebAuthSession> mdb=(DropboxAPI<WebAuthSession>)session.getAttribute("Dropbox");
+if(mdb!=null){
+%>
+<%--
+<jsp:include page="/dropbox/updatefile.jsp"  />
+--%>
+<%
+}
+%>
 
 
 <div class="container">
@@ -76,20 +88,16 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>dropbox</td>
-									<td>sample file
-										 </td>
-									<td class="td-actions">
-										<a href="javascript:;" class="btn btn-small btn-warning">
-											<i class="btn-icon-only icon-ok"></i>										
-										</a>
-										
-										<a href="javascript:;" class="btn btn-small">
-											<i class="btn-icon-only icon-remove"></i>										
-										</a>
-									</td>
-								</tr>
+							
+								<%
+								if(mdb!=null){
+								%>
+								<jsp:include page="/dropbox/main_dropbox.jsp"  />
+								<%
+								}
+								%>
+								
+								
 								<tr>
 									<td>box.net</td>
 									<td>sample file0</td>

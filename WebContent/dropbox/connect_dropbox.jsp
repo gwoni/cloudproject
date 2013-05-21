@@ -62,12 +62,14 @@ try{
 	if(was.isLinked()==true){
 		DropboxAPI<WebAuthSession> mdb = new DropboxAPI<WebAuthSession>(was);
 		session.setAttribute("Dropbox",mdb);
-		String url="/main_dropbox.jsp?path=/";
+		String path="/";
+		session.setAttribute("Dropbox_path",path);
+		String url="/connect.jsp";
 		response.sendRedirect(url);
 	}
 	else{
 		was=new WebAuthSession(appKeyPair,Session.AccessType.APP_FOLDER);
-		WebAuthInfo info = was.getAuthInfo("http://dockingcloud.cloudfoundry.com/connect_dropbox_continue.jsp");
+		WebAuthInfo info = was.getAuthInfo("http://dockingcloud.cloudfoundry.com/dropbox/connect_dropbox_continue.jsp");
 		RequestTokenPair pair=info.requestTokenPair;
 		session.setAttribute("Token",pair);
 		session.setAttribute("WebSession",was);

@@ -22,11 +22,13 @@
 			
 			session.setAttribute("loginid",member.getMain_id());
 			session.setAttribute("loginname",member.getMain_name());
+			boolean Dropbox_update=false;
+			session.setAttribute("Dropbox_update",Dropbox_update);
 			response.sendRedirect("/connect.jsp");
+			
 			
 		}
 	}
 	stmt.close();
-	conn.close();
-	
+	conn.close();	
 %>
