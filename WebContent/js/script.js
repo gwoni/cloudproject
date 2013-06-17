@@ -42,14 +42,3 @@ function validate() {
     }
     
 }
-function OnCheck(){
-	var name=prompt("Enter the name of the folder in which you want to create(korean can not support)","");
-	if(name=="" || name == null){
-		
-		return false;
-	}
-	else{
-		location.href="/dropbox/dropbox_createfile.jsp?name="+name;
-	}
-	return false;
-}

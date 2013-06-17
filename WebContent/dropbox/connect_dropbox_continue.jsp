@@ -8,7 +8,7 @@
 <%@ page import="com.dropbox.client2.session.AccessTokenPair" %>
 <%@ page import= "com.dropbox.client2.DropboxAPI" %>
 <%@ page import= "com.dropbox.client2.DropboxAPI.DeltaEntry" %>
-<%@ page import= "com.dropbox.client2.exception.*" %>
+
 <%@ page import= "com.dropbox.client2.jsonextract.*" %>
 <%@ page import= "org.json.simple.JSONArray" %>
 <%@ page import= "org.json.simple.JSONObject" %>

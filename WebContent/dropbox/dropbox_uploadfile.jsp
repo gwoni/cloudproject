@@ -14,6 +14,7 @@
 String savePath = application.getRealPath("/file");
 DropboxAPI<WebAuthSession> mdb=(DropboxAPI<WebAuthSession>)session.getAttribute("Dropbox");
 if(mdb == null){
+	
 	response.sendRedirect("/connect.jsp");
 }
 
@@ -22,7 +23,10 @@ if(mdb == null){
  MultipartRequest multi = new MultipartRequest(request,savePath,sizeLimit,"utf-8",new DefaultFileRenamePolicy());
  
  File file = multi.getFile("upfile");
- 
+ if(file ==null){
+	
+	 response.sendRedirect("/connect.jsp");
+ }
  String fileName = file.getName();
  String Path = (String)session.getAttribute("Dropbox_path");
  Path=Path+fileName;

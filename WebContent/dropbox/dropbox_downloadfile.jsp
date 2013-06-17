@@ -2,6 +2,7 @@
 <%@ page import= "com.dropbox.client2.DropboxAPI.*" %>
 <%@ page import= "com.dropbox.client2.DropboxAPI" %>
 <%@ page import="com.dropbox.client2.session.*" %>
+<%@ page import= "com.dropbox.client2.exception.*" %>
 <%@ page import="java.io.*" %>
 <%@ page import="java.net.*" %>
 <% 
@@ -9,6 +10,7 @@
 
  //String fileName = "tomcat.gif";
 
+try{
 
  String filePath =URLDecoder.decode(request.getParameter("filepath"));
  
@@ -17,6 +19,14 @@
  String fileName=URLDecoder.decode(request.getParameter("filename"));
  fileName=new String(fileName.getBytes("8859_1"), "EUC-KR");
  DropboxAPI<WebAuthSession> mdb=(DropboxAPI<WebAuthSession>)session.getAttribute("Dropbox");
+ 
+DropboxAPI.Entry m_file = mdb.metadata(filePath, 0, null, true, null);
+
+if(m_file.isDir == true){
+	session.setAttribute("Dropbox_path",filePath);
+	response.sendRedirect("/connect.jsp");
+}
+else{
 
  
  fileName=new String(fileName.getBytes("EUC-KR"), "8859_1");
@@ -57,6 +67,14 @@
 fw.close();
  
 din.close();
+}
+
+}catch(DropboxUnlinkedException e){
+	response.sendRedirect("/setting.jsp");
+}
+
+
+
 //outputStream.close();
  
 

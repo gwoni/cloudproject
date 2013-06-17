@@ -17,7 +17,20 @@ if(mdb!=null){
 <%
 }
 %>
-<script language="JavaScript" src="/js/script.js"></script>
+<script language="JavaScript">
+
+function OnCheck(){
+	var name=prompt("Enter the name of the folder in which you want to create(korean can not support)","");
+	if(name=="" || name == null){
+		
+		return false;
+	}
+	else{
+		location.href="/dropbox/dropbox_createfile.jsp?name="+name;
+	}
+	return false;
+}
+</script>
 
 <div class="container">
     <div class="row">

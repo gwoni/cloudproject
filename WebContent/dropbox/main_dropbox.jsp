@@ -60,7 +60,7 @@
 				out.println("<td class='td-actions'>");
 			    out.println("<a href='/dropbox/dropbox_downloadfile.jsp?filepath="+temp_path+"&filename="+URLEncoder.encode(filename,"euc-kr")+"' class='btn btn-small btn-warning'>");
 			    out.println("<i class='btn-icon-only icon-ok'></i></a>");
-			    out.println("<a href='javascript:;' class='btn btn-small'>");
+			    out.println("<a href='/dropbox/dropbox_deletefile.jsp?filepath="+temp_path+"' class='btn btn-small'>");
 			    out.println("<i class='btn-icon-only icon-remove'></i></a></td>");
 			    out.println("</tr>");
 			}
