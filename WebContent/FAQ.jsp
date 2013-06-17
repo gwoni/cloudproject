@@ -2,12 +2,12 @@
 <%@page import="java.util.*" %>
 <%@page import="java.sql.*,javax.sql.*"%>
 
- <link href="/css/pages/faq.css" rel="stylesheet" >
+
 
 
  
 <jsp:include page="header.jsp"  />
-
+ <link href="/css/pages/faq.css" rel="stylesheet" >
 <div class="main">
 	
 	<div class="main-inner">

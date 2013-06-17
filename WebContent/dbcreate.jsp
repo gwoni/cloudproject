@@ -13,7 +13,7 @@
 	Connection conn = (Connection) services.getInstance(CloudFoundryServices.MYSQL);
 	Statement stmt =conn.createStatement();
 	
-	
+	stmt.executeUpdate(sql);
 	ResultSet rs=stmt.executeQuery("show tables");
 	while(rs.next()){
 		out.println("table : " + rs.getString(1) + "<br>");	
