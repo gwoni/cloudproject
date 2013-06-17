@@ -16,7 +16,7 @@
 
   <div class="container">
   	<form class="form-signin" action="process_login.jsp" method="post" name="login_post" onsubmit="return false">
-  		<h2 class="form-signin-heading">Docking Cloud 로그인</h2>
+  		<h2 class="form-signin-heading">Docking Cloud 　　　　　　　Login</h2>
   		<input type="text" name=main_id class="input-block-level" placeholder="사용자 ID" >
   		<input type="password" name=main_password class="input-block-level" placeholder="사용자 암호">
   		<button class="btn btn-large btn-primary" type="submit" onClick="validate()"> 로그인 </button>

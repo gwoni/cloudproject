@@ -53,10 +53,17 @@ try{
 	String sql="UPDATE dropbox SET access_key='"+key+"', access_secret='"+secret+"' where main_id='"+id+"'";
 	stmt.executeUpdate(sql);
 	DropboxAPI<WebAuthSession> mdb = new DropboxAPI<WebAuthSession>(auth);
-
+	DropboxAPI.Entry mainlist=mdb.metadata("/",0, null, true, null);
+	int total=(int)session.getAttribute("total");
+	total=total+DropboxAPI.METADATA_DEFAULT_LIMIT;
+	Long size=(Long)session.getAttribute("use");
+	size=size+mainlist.bytes;
+	session.setAttribute("use",size);
+	session.setAttribute("total",total);
 	session.setAttribute("Dropbox",mdb);
 	session.setAttribute("Dropbox_path","/");
 	String url="/connect.jsp";
+	
 	response.sendRedirect(url);
 
 	stmt.close();

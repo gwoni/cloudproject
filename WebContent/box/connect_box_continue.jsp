@@ -42,7 +42,7 @@
         GetTicketResponse getTicketResponse = iBoxExternalAPI.getTicket(getTicketRequest);
         
         TICKET=getTicketResponse.getTicket();
-        
+       
         GetAuthTokenRequest getAuthTokenRequest = BoxRequestFactory.createGetAuthTokenRequest(API_KEY, TICKET);
         GetAuthTokenResponse getAuthTokenResponse = iBoxExternalAPI.getAuthToken(getAuthTokenRequest);
 
@@ -65,6 +65,7 @@
         GetAccountInfoResponse getAccountInfoResponse = iBoxExternalAPI.getAccountInfo(getAccountInfoRequest);
 
         System.out.println(getAccountInfoResponse.getStatus());
+        
         
     }catch(Exception ex){
     	

@@ -64,6 +64,13 @@ try{
 		session.setAttribute("Dropbox",mdb);
 		String path="/";
 		session.setAttribute("Dropbox_path",path);
+		DropboxAPI.Entry mainlist=mdb.metadata("/",0, null, true, null);
+		Long total=(Long)session.getAttribute("total");
+		total=total+DropboxAPI.MAX_UPLOAD_SIZE;
+		Long size=(Long)session.getAttribute("use");
+		size=size+mainlist.bytes;
+		session.setAttribute("use",size);
+		session.setAttribute("total",total);
 		String url="/connect.jsp";
 		response.sendRedirect(url);
 	}

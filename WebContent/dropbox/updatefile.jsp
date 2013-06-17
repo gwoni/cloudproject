@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=utf-8" %>
 
 <%@ page import="com.dropbox.client2.exception.*" %>
@@ -20,14 +19,13 @@
 <%
 
 DropboxAPI<WebAuthSession> mdb=(DropboxAPI<WebAuthSession>)session.getAttribute("Dropbox");
-
 ServiceManager services =ServiceManager.INSTANCE;
 Connection conn = (Connection) services.getInstance(CloudFoundryServices.MYSQL);
 Statement stmt =conn.createStatement();
 
-thinkonweb.bean.File file=new thinkonweb.bean.File();
-thinkonweb.bean.FileQuery filequery=new thinkonweb.bean.FileQuery();
-if(mdb==null){
+	File file=new File();
+	thinkonweb.bean.FileQuery filequery=new thinkonweb.bean.FileQuery();
+	if(mdb==null){
 	
    ;
    

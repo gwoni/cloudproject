@@ -15,14 +15,15 @@
 <%@ page import= "org.json.simple.parser.JSONParser" %>
 <%@ page import= "org.json.simple.parser.ParseException" %>
 
+<%@ page import="thinkonweb.bean.*" %>
+
 <%@ page import= "java.io.*" %>
+<%@ page import= "java.util.*" %>
 <%@ page import= "java.util.List" %>
-<%@ page import= "java.util.HashMap" %>
-<%@ page import= "java.util.Map" %>
 <%@ page import= "java.awt.*" %>
 <%@ page import= "java.net.*" %>
 
-
+<jsp:useBean id="dataQuery" class="thinkonweb.bean.DataQuery"></jsp:useBean>
 
 <% 
 	try{
@@ -31,12 +32,26 @@
 
 		String name=account.displayName;
 		String path=(String)session.getAttribute("Dropbox_path");
+		
+		Vector<Data> dataList=new Vector<Data>();
+		String id=(String)session.getAttribute("loginid");
 
 
 		DropboxAPI.Entry mainlist=mdb.metadata(path,0, null, true, null);
 		List<DropboxAPI.Entry> list_0=mainlist.contents;
 		
-		if(list_0.size()==0)
+		dataQuery.insertData(dataList);
+		
+			
+			
+		
+		
+		//	insertData Query를 이용하여 자료를 DB에 삽입한다.
+		
+		Vector<Data> getDataList=new Vector<Data>();
+		getDataList=dataQuery.getDataList(id);
+		
+		if(getDataList.size()==0)
 		{
 			out.println("<tr>");
 			out.println("<td>dropbox</td>");
@@ -49,24 +64,23 @@
 	    	out.println("</tr>");
 		}else{
 		
-			for(int i=0;i<list_0.size();i++){
-				DropboxAPI.Entry Varsinfo=list_0.get(i);
-				String filename=Varsinfo.fileName();
-			
-				String temp_path=URLEncoder.encode(Varsinfo.path,"euc-kr");
+			for(int i=0 ; i<getDataList.size() ; i++){
+				Data data=new Data();
+				data=getDataList.get(i);
+
 				out.println("<tr>");
 				out.println("<td>dropbox</td>");
-				out.println("<td>"+filename+"</td>");
+				out.println("<td>"+data.getFname()+"</td>");
 				out.println("<td class='td-actions'>");
-			    out.println("<a href='/dropbox/dropbox_downloadfile.jsp?filepath="+temp_path+"&filename="+URLEncoder.encode(filename,"euc-kr")+"' class='btn btn-small btn-warning'>");
+			    out.println("<a href='javascript:;' class='btn btn-small btn-warning'>");
 			    out.println("<i class='btn-icon-only icon-ok'></i></a>");
-			    out.println("<a href='javascript:;' class='btn btn-small'>");
-			    out.println("<i class='btn-icon-only icon-remove'></i></a></td>");
+			    out.println("<a href='/dropbox/downloadfile.jsp?filepath="+data.getFpath()+"&filename="+URLEncoder.encode(data.getFname(),"euc-kr")+"' class='btn btn-small'>");
+			    out.println("<i class='btn-icon-only icon-ok'></i></a></td>");
 			    out.println("</tr>");
 			}
 		}	
 	}catch(Exception ex){
-	ex.printStackTrace();
+		ex.printStackTrace();
 	}
 %>
 
