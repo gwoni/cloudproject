@@ -45,8 +45,6 @@
         String name=(String)session.getAttribute("loginid");
           if(name!=null){
 		%>
-		         
-
 	        <ul class="nav pull-right">
 	          <form class="navbar-search">
   				<div class="input-append">
@@ -61,33 +59,13 @@
  				 <a class="btn btn-primary" href="connect.jsp"><i class="icon-user icon-white"></i> User</a>
  				 <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
  				 <ul class="dropdown-menu">
- 				 
- 			
- 				<button class="demo btn btn-primary btn-large" data-toggle="modal" href="#static">View Demo</button>
-				<div id="static" class="modal hide fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
-  					<div class="modal-body">
-   					 <p>Would you like to continue with some arbitrary task?</p>
- 					 </div>
- 				 <div class="modal-footer">
-  				  <button type="button" data-dismiss="modal" class="btn">Cancel</button>
-   				 <button type="button" data-dismiss="modal" class="btn btn-primary">Continue Task</button>
- 				 </div>
-			    </div>
-				
-          
-				
+ 				 		
 					
   				 <li><a href="setting.jsp"><i class="icon-pencil"></i> 연결하기</a></li>
-  				  
-  				  
-  				  
-  				  
-  				 
-  				 
-  				  
+  				    
   				  <li><a href="#"><i class="icon-pencil"></i> 수정하기</a></li>
     			  <li><a href="process_logout.jsp"><i class="icon-trash"></i> 로그아웃</a></li>
-    			  <li><a href="#"><i class="icon-ban-circle"></i> 탈퇴하기</a></li>
+    			  <li><a href="process_dropout.jsp"><i class="icon-ban-circle"></i> 탈퇴하기</a></li>
     			  <li class="divider"></li>
     			  <li><a href="#"><i class="i"></i> Make admin</a></li>
  				 </ul>
@@ -99,9 +77,8 @@
              	 	<li><a href="register.jsp">회원가입</a></li>
              	 	<li><a href="register.jsp">아이디/비밀번호 찾기</a></li>
              	</ul>
-        		<form class="navbar-form pull-right">
-             	 
-             	 <button type="submit" class="btn"><a href="/login.jsp">Sign in</a></button>
+        		<form class="navbar-form pull-right" action="login.jsp">
+             	 	<button type="submit" class="btn">Sign in</button>
            		</form>
              	 
         <% } %>

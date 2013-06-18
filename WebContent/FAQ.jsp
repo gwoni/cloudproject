@@ -2,9 +2,12 @@
 <%@page import="java.util.*" %>
 <%@page import="java.sql.*,javax.sql.*"%>
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> upstream/master
  
 <jsp:include page="header.jsp"  />
  <link href="/css/pages/faq.css" rel="stylesheet" >

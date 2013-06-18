@@ -1,11 +1,13 @@
 package thinkonweb.bean;
 
-import java.sql.*;
-import java.util.*;
-import thinkonweb.bean.*;
-import java.sql.*;
-import javax.sql.*;
-import org.cloudfoundry.services.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Vector;
+
+import org.cloudfoundry.services.CloudFoundryServices;
+import org.cloudfoundry.services.ServiceManager;
 
 
 public class MemeberMgr {

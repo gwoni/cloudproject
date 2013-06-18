@@ -17,12 +17,12 @@
 
   <div class="container">
   	<form class="form-signin" name="regForm" action="process_register.jsp" method="post" onsubmit="return false">
-  		<h2 class="form-signin-heading">Docking Cloud 가입</h2>
+  		<h2 class="form-signin-heading">Docking Cloud 　　　　　　　 가입</h2>
   		<input type="text" name=main_id class="input-block-level" placeholder="사용자 Email">
   		<input type="password" name=main_password class="input-block-level" placeholder="사용자 비밀번호">
   		<input type="password" name=main_password_re class="input-block-level" placeholder="사용자 비밀번호 확인">
   		<input type="text" name=main_name class="input-block-level" placeholder="사용자 이름">
-  		<button class="btn btn-large btn-primary" onclick="inputCheck()"> 가입 </button>
+  			<button class="btn btn-large btn-primary" onclick="inputCheck()"> 가입 </button>
   	</form>
   </div>
 

@@ -48,15 +48,6 @@
 		String URL="http://www.box.net/api/1.0/auth/"+TICKET;
 
 		response.sendRedirect(URL);
-    	GetAuthTokenRequest getAuthTokenRequest = BoxRequestFactory.createGetAuthTokenRequest(API_KEY, getTicketResponse.getTicket());
-	    GetAuthTokenResponse getAuthTokenResponse = iBoxExternalAPI.getAuthToken(getAuthTokenRequest);
-%>
-<%
-
-	    if (BoxConstant.STATUS_NOT_LOGGED_IN.equals(getAuthTokenResponse.getStatus()))
-	     	   	return;
-    	    
-	    String authToken = getAuthTokenResponse.getAuthToken();
 	    
 		}catch(Exception e){
 	    	e.printStackTrace();

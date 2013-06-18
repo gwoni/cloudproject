@@ -10,8 +10,8 @@
               
               <li class="active"><a href="#">Docking Cloud</a></li>
               <li class="nav-header">My cloud</li>
-              <li><a href="connect_box.jsp">Box.net</a></li>
-              <li><a href="connect_dropbox.jsp">Dropbox</a></li>
+              <li><a href="box/connect_box.jsp">Box.net</a></li>
+              <li><a href="dropbox/connect_dropbox.jsp">Dropbox</a></li>
               <li><a href="#">Google</a></li>
               <li><a href="#">4shared</a></li>
               <li><a href="#">ucloud</a></li>
@@ -41,7 +41,7 @@
         		</div>
         		<div class="widget-content">
         			<div class ="shortcuts">
-        				<a href="connect_dropbox.jsp" class= "shortcut"> <img src="https://www.dropbox.com/static/images/new_logo.png"/> <span class="shortcut-label">dropbox</span></a>
+        				<a href="dropbox/connect_dropbox.jsp" class= "shortcut"> <img src="https://www.dropbox.com/static/images/new_logo.png"/> <span class="shortcut-label">dropbox</span></a>
         				<a href="connect_box.jsp" class= "shortcut"> <img src="img/box_logo.png"/> <span class="shortcut-label">box.net</span></a>
         			</div>
         		</div>
